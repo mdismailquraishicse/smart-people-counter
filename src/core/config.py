@@ -7,6 +7,8 @@ class Settings(BaseSettings):
 
     SOURCE:str = "0"
     MODEL:str = "yolov8n.pt"
+    WIDTH:int = 1280
+    HEIGHT:int = 640
 
     model_config = SettingsConfigDict(
         env_file = ".env",
