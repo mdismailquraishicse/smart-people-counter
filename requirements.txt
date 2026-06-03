@@ -1,1 +1,2 @@
 ultralytics==8.4.59
+pydantic-settings==2.14.1
