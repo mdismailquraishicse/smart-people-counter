@@ -18,7 +18,7 @@ class PeopleCounter:
             "right": 0
         }
 
-        self.FRAME_SIZE = (1280, 620)
+        self.FRAME_SIZE = (settings.WIDTH, settings.HEIGHT)
         self.LINE_X:int = None
         self.LINE_Y:int = None
         self.track_history_x = {}
@@ -30,7 +30,7 @@ class PeopleCounter:
     @property
     def total_in_frame(self):
 
-        return self.count.get("up") + self.count.get("down")
+        return self.count.get("up") + self.count.get("down") + self.count.get("left") + self.count.get("right")
 
 
     def get_coordinates(self, boxes):
@@ -90,10 +90,11 @@ class PeopleCounter:
                 cv2.circle(frame, (cx, cy), 2, (0, 0, 255), -1)
             cv2.line(frame, (0, self.LINE_Y), (w, self.LINE_Y), (0, 255, 0), 2)
             cv2.line(frame, (self.LINE_X, 0), (self.LINE_X, h), (0, 255, 0), 2)
-            cv2.putText(frame, f"up: {self.count.get('up')}", (20, 40), cv2.FONT_HERSHEY_SIMPLEX,1,(255, 255, 0), 1)
-            cv2.putText(frame, f"down: {self.count.get('down')}", (20, 80), cv2.FONT_HERSHEY_SIMPLEX,1,(255, 255, 0), 1)
-            cv2.putText(frame, f"left: {self.count.get('left')}", (20, 120), cv2.FONT_HERSHEY_SIMPLEX,1,(255, 255, 0), 1)
-            cv2.putText(frame, f"right: {self.count.get('right')}", (20, 160), cv2.FONT_HERSHEY_SIMPLEX,1,(255, 255, 0), 1)
+            cv2.putText(frame, f"up: {self.count.get('up')}", (20, 40), cv2.FONT_HERSHEY_SIMPLEX,1,(0, 0, 0), 2)
+            cv2.putText(frame, f"down: {self.count.get('down')}", (20, 80), cv2.FONT_HERSHEY_SIMPLEX,1,(0, 0, 0), 2)
+            cv2.putText(frame, f"left: {self.count.get('left')}", (20, 120), cv2.FONT_HERSHEY_SIMPLEX,1,(0, 0, 0), 2)
+            cv2.putText(frame, f"right: {self.count.get('right')}", (20, 160), cv2.FONT_HERSHEY_SIMPLEX,1,(0, 0, 0), 2)
+            cv2.putText(frame, f"total: {self.total_in_frame}", (20, 200), cv2.FONT_HERSHEY_SIMPLEX,1,(0, 0, 0), 2)
             cv2.imshow("PeopleCounter", frame)
             if cv2.waitKey(1) == ord("q"):
                 break
