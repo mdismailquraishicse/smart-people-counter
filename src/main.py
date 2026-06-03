@@ -1,6 +1,6 @@
 import cv2
 from ultralytics import YOLO
-
+from core.config import settings
 
 
 class PeopleCounter:
@@ -8,9 +8,9 @@ class PeopleCounter:
 
     def __init__(self):
 
+        self.SOURCE = settings.SOURCE
+        self.model = YOLO(settings.MODEL)
 
-        self.SOURCE = "./data/public.mp4"
-        self.model = YOLO("yolov8n.pt")
         self.count: dict = {
             "up": 0,
             "down": 0,
