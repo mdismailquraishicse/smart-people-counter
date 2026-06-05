@@ -5,7 +5,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
 
 
-    SOURCE:str = "0"
+    SOURCE:str | int = 0
     MODEL:str = "yolov8n.pt"
     WIDTH:int = 1280
     HEIGHT:int = 640
